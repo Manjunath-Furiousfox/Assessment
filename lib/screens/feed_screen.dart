@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class FeedScreen extends ConsumerWidget {
-  const FeedScreen({Key? key}) : super(key: key);
+  FeedScreen({Key? key}) : super(key: key);
 
+  final selectedChipProvider = StateProvider<String>(((ref) => "POST"));
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.read(filterProvider.notifier).fetchCategoryList();
+    final selectedChip = ref.watch(selectedChipProvider);
     List filter = ref.watch(filterProvider).categoryList;
-
     return SafeArea(
         child: Scaffold(
       body: Column(
@@ -22,7 +23,8 @@ class FeedScreen extends ConsumerWidget {
               itemBuilder: (context, index) {
                 return GestureDetector(
                     onTap: () {
-                      print(Text(filter[index]));
+                      ref.read(selectedChipProvider.state).state =
+                          filter[index];
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -34,7 +36,12 @@ class FeedScreen extends ConsumerWidget {
               },
             ),
           ),
-          Expanded(child: Container())
+          Expanded(
+              child: SizedBox(
+            child: Center(
+              child: Text(selectedChip),
+            ),
+          ))
         ],
       ),
     ));
