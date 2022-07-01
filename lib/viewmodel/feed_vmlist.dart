@@ -6,10 +6,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class FeedVMList extends ChangeNotifier {
   List<FeedViewModel> feedList = [];
   String selectedType = "";
-  fetchFeedList(String type) async {
+  fetchFeedList(List type) async {
     final results = await FeedAPI().fetchFeed(type);
     feedList = results!.map((e) => FeedViewModel(posts: e)).toList();
-    selectedType = type;
+    // selectedType = type;
     notifyListeners();
   }
 }

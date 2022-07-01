@@ -9,11 +9,11 @@ class FeedWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     List<FeedViewModel> feedList = ref.watch(feedprovider).feedList;
-    String selectedType = ref.watch(feedprovider).selectedType;
+    // String selectedType = ref.watch(feedprovider).selectedType;
     Size size = MediaQuery.of(context).size;
     return Column(
       children: [
-        Text("${selectedType} ${feedList.length.toString()}"),
+        Text("Count ${feedList.length.toString()}"),
         Expanded(
           child: ListView.builder(
             shrinkWrap: true,
