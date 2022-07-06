@@ -5,11 +5,26 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class FeedVMList extends ChangeNotifier {
   List<FeedViewModel> feedList = [];
+  int _page = 0;
+  int count = 20;
+  List? typeList;
   String selectedType = "";
+  bool hasmore = true;
   fetchFeedList(List type) async {
-    final results = await FeedAPI().fetchFeed(type);
+    _page = 0;
+    typeList = type;
+    final results = await FeedAPI().fetchFeed(type, _page, count);
     feedList = results!.map((e) => FeedViewModel(posts: e)).toList();
-    // selectedType = type;
+
+    notifyListeners();
+  }
+
+  fetchLoadMore() async {
+    _page += 1;
+    final results = await FeedAPI().fetchFeed(typeList!, _page, count);
+
+    feedList.addAll(results!.map((e) => FeedViewModel(posts: e)).toList());
+
     notifyListeners();
   }
 }

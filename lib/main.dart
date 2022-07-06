@@ -1,4 +1,4 @@
-import 'package:assessment/screens/feed_screen.dart';
+import 'package:assessment/screens/new_feed_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: FeedScreen(),
+      home: const NewFeedScreen(),
     );
   }
 }

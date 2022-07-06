@@ -9,12 +9,12 @@ class FeedAPI {
     _dio = Dio();
   }
 
-  Future<List<Items>?> fetchFeed(List type) async {
+  Future<List<Items>?> fetchFeed(List type, page, count) async {
     var params = {
       "postTypes": type,
     };
     String url =
-        'https://api.cohora.net/post/v1/feed?feedOrigin=ALL_ACTIVITY&page=1&perPage=20';
+        'https://api.cohora.net/post/v1/feed?feedOrigin=ALL_ACTIVITY&page=$page&perPage=$count';
 
     try {
       Response response = await _dio!.get(url, queryParameters: params);

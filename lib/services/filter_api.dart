@@ -19,8 +19,7 @@ class CategoryAPI {
           HttpHeaders.contentTypeHeader: "application/json",
         }),
       );
-      List list = response.data;
-      // print(list);
+      var list = response.data;
 
       return list;
     } catch (error) {
